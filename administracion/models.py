@@ -136,9 +136,9 @@ class aplicacionesServidores(models.Model):
 class robots(models.Model):
     ACTIVO=models.BooleanField(default=False)
     NOMBRE=models.CharField(unique=True,max_length=120,null=False,blank=False)
-    PRODUCCION = models.ForeignKey(servidores, default=1, on_delete=models.PROTECT, related_name='robots_produccion', limit_choices_to={'TIPO': 'Produccion'})
-    TEST = models.ForeignKey(servidores, default=1, on_delete=models.PROTECT, related_name='robots_test', limit_choices_to={'TIPO': 'Test'})
-    DESARROLLO = models.ForeignKey(servidores, default=1, on_delete=models.PROTECT, related_name='robots_desarrollo', limit_choices_to={'TIPO': 'Desarrollo'})
+    PRODUCCION = models.ForeignKey(servidores,null=True, on_delete=models.PROTECT, related_name='robots_produccion', limit_choices_to={'TIPO': 'Produccion'})
+    TEST = models.ForeignKey(servidores,null=True, on_delete=models.PROTECT, related_name='robots_test', limit_choices_to={'TIPO': 'Test'})
+    DESARROLLO = models.ForeignKey(servidores,null=True, on_delete=models.PROTECT, related_name='robots_desarrollo', limit_choices_to={'TIPO': 'Desarrollo'})
     FECHA_PUESTA_PRD=models.DateField(null=True,blank=True)
     GERENCIA=models.ForeignKey(Gerencia,on_delete=models.PROTECT,blank=False,null=False)
     USUARIO=models.ForeignKey(Usuario,on_delete=models.PROTECT,blank=False,null=False)
