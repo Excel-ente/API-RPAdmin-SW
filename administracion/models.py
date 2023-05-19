@@ -155,7 +155,7 @@ class robots(models.Model):
     EJECUCIONES=models.IntegerField(null=True,blank=True)
     ERRORES=models.IntegerField(null=True,blank=True)
     FATAL=models.IntegerField(null=True,blank=True)
-    REPROCESAR=models.TextField()
+    REPROCESAR=models.TextField(null=True,blank=True)
     
     class Meta:
         verbose_name = 'Robot'
