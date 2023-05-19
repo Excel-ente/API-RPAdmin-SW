@@ -98,7 +98,7 @@ class adminServidores(ImportExportModelAdmin):
     inlines = [
         aplicacionesServidoresInline,
     ]
-    list_display=('HOSTNAME','TIPO','SISTEMA_OPERATIVO','PROCESADOR','MEMORIA_RAM','ARQUITECTURA','DOMINIO',)
+    list_display=('HOSTNAME','TIPO','SISTEMA_OPERATIVO','PROCESADOR','MEMORIA_RAM','ARQUITECTURA','DOMINIO','COMENTARIOS',)
     ordering=('TIPO',)
     search_fields= ('HOSTNAME',)
     list_per_page = 20
