@@ -1,0 +1,208 @@
+{% extends "admin/change_list.html" %}
+{% load static %}
+
+{% block extrahead %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+ 
+        }
+
+        .card {
+            width: 250px;
+            height: 300px;
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card .card-header {
+            color: rgb(25, 25, 25);
+        }
+        
+        .card .card-body {
+            flex-grow: 1;
+            padding: 5px;
+        }
+
+        /* Estilos para cada estado */
+        .card.estado-no-iniciado {
+            background-color: #f9a4a4;
+        }
+
+        .card.estado-iniciado {
+            background-color: #59f0f3;
+        }
+
+        .card.estado-esperando {
+            background-color: #bfb1ff;
+        }
+
+        .card.estado-finalizada {
+            background-color: #b0ffb5   ;
+        }
+    </style>
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-3">
+                <h5 style="text-align: center;"> No iniciado</h5>
+                {% for item in cl.result_list %}
+                    {% if item.ESTADO == 'No inciado' %}
+                    <div class="card {% if item.class_css %}{{ item.class_css }}{% endif %}">
+                        <!-- Mostrar los campos de la tarea como deseado -->
+                        <div class="card-header text-center" style="padding: 3px;margin-bottom: 0;">
+                            <h6 style="margin-bottom: 0;">{{ item.NOMBRE|truncatechars:50 }}</h6>
+                            <p style="font-size: smaller;margin-bottom: 0;">📅{{ item.FECHA_FIN }} ⏱️{{ item.TIEMPO_INVERTIDO }}</p>
+                        </div>
+                        <div class="card-body" style="margin: 3px;">
+                            <div>
+                                <p style="font-size: smaller; margin-bottom: 0;">✍️<b>Comentarios:</b> </p>
+                                <p style="font-size: smaller; padding: 2px;">{{ item.COMENTARIOS|truncatechars:160 }}</p>
+
+                            </div>
+                            <!-- Otros campos de la tarea -->
+                        </div>
+                        <div class="card-footer" style="display: flex; justify-content: space-between;">
+                            <div class="mr-2">
+                                <a href="{% url 'admin:app_list' app_label='administracion' %}tarea/{{ item.id }}/change" class="btn btn-success">
+                                    <span class="fas fa-edit" style="color: rgba(255, 255, 255, 0.938);"></span>
+                                    Editar
+                                </a>
+                            </div>
+                            <div>
+                                <a href="{% url 'admin:app_list' app_label='administracion' %}tarea/{{ item.id }}/delete" class="btn btn-danger">
+                                    <span class="far fa-trash-alt" style="color: rgba(255, 255, 255, 0.938);"></span>
+                                    Borrar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="col-md-3">
+                <h5 style="text-align: center;">Iniciado</h5>
+                {% for item in cl.result_list %}
+                    {% if item.ESTADO == 'inciado' %}
+                    <div class="card {% if item.class_css %}{{ item.class_css }}{% endif %}">
+                        <!-- Mostrar los campos de la tarea como deseado -->
+                        <div class="card-header text-center" style="padding: 3px;margin-bottom: 0;">
+                            <h6 style="margin-bottom: 0;">{{ item.NOMBRE|truncatechars:50 }}</h6>
+                            <p style="font-size: smaller;margin-bottom: 0;">📅{{ item.FECHA_FIN }} ⏱️{{ item.TIEMPO_INVERTIDO }}</p>
+                        </div>
+                        <div class="card-body" style="margin: 3px;">
+                            <div>
+                                <p style="font-size: smaller; margin-bottom: 0;">✍️<b>Comentarios:</b> </p>
+                                <p style="font-size: smaller; padding: 2px;">{{ item.COMENTARIOS|truncatechars:160 }}</p>
+
+                            </div>
+                            <!-- Otros campos de la tarea -->
+                        </div>
+                        <div class="card-footer" style="display: flex; justify-content: space-between;">
+                            <div class="mr-2">
+                                <a href="{% url 'admin:app_list' app_label='administracion' %}tarea/{{ item.id }}/change" class="btn btn-success">
+                                    <span class="fas fa-edit" style="color: rgba(255, 255, 255, 0.938);"></span>
+                                    Editar
+                                </a>
+                            </div>
+                            <div>
+                                <a href="{% url 'admin:app_list' app_label='administracion' %}tarea/{{ item.id }}/delete" class="btn btn-danger">
+                                    <span class="far fa-trash-alt" style="color: rgba(255, 255, 255, 0.938);"></span>
+                                    Borrar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="col-md-3">
+                <h5 style="text-align: center;">Esperando Respuesta</h5>
+                {% for item in cl.result_list %}
+                    {% if item.ESTADO == 'Esperando Respuesta' %}
+                    <div class="card {% if item.class_css %}{{ item.class_css }}{% endif %}">
+                        <!-- Mostrar los campos de la tarea como deseado -->
+                        <div class="card-header text-center" style="padding: 3px;margin-bottom: 0;">
+                            <h6 style="margin-bottom: 0;">{{ item.NOMBRE|truncatechars:50 }}</h6>
+                            <p style="font-size: smaller;margin-bottom: 0;">📅{{ item.FECHA_FIN }} ⏱️{{ item.TIEMPO_INVERTIDO }}</p>
+                        </div>
+                        <div class="card-body" style="margin: 3px;">
+                            <div>
+                                <p style="font-size: smaller; margin-bottom: 0;">✍️<b>Comentarios:</b> </p>
+                                <p style="font-size: smaller; padding: 2px;">{{ item.COMENTARIOS|truncatechars:160 }}</p>
+
+                            </div>
+                            <!-- Otros campos de la tarea -->
+                        </div>
+                        <div class="card-footer" style="display: flex; justify-content: space-between;">
+                            <div class="mr-2">
+                                <a href="{% url 'admin:app_list' app_label='administracion' %}tarea/{{ item.id }}/change" class="btn btn-success">
+                                    <span class="fas fa-edit" style="color: rgba(255, 255, 255, 0.938);"></span>
+                                    Editar
+                                </a>
+                            </div>
+                            <div>
+                                <a href="{% url 'admin:app_list' app_label='administracion' %}tarea/{{ item.id }}/delete" class="btn btn-danger">
+                                    <span class="far fa-trash-alt" style="color: rgba(255, 255, 255, 0.938);"></span>
+                                    Borrar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="col-md-3">
+                <h5 style="text-align: center;">Finalizado</h5>
+                {% for item in cl.result_list %}
+                    {% if item.ESTADO == 'Finalizada' %}
+                    <div class="card {% if item.class_css %}{{ item.class_css }}{% endif %}">
+                        <!-- Mostrar los campos de la tarea como deseado -->
+                        <div class="card-header text-center" style="padding: 3px;margin-bottom: 0;">
+                            <h6 style="margin-bottom: 0;">{{ item.NOMBRE|truncatechars:50 }}</h6>
+                            <p style="font-size: smaller;margin-bottom: 0;">📅{{ item.FECHA_FIN }} ⏱️{{ item.TIEMPO_INVERTIDO }}</p>
+                        </div>
+                        <div class="card-body" style="margin: 3px;">
+                            <div>
+                                <p style="font-size: smaller; margin-bottom: 0;">✍️<b>Comentarios:</b> </p>
+                                <p style="font-size: smaller; padding: 2px;">{{ item.COMENTARIOS|truncatechars:160 }}</p>
+
+                            </div>
+                            <!-- Otros campos de la tarea -->
+                        </div>
+                        <div class="card-footer" style="display: flex; justify-content: space-between;">
+                            <div class="mr-2">
+                                <a href="{% url 'admin:app_list' app_label='administracion' %}tarea/{{ item.id }}/change" class="btn btn-success">
+                                    <span class="fas fa-edit" style="color: rgba(255, 255, 255, 0.938);"></span>
+                                    Editar
+                                </a>
+                            </div>
+                            <div>
+                                <a href="{% url 'admin:app_list' app_label='administracion' %}tarea/{{ item.id }}/delete" class="btn btn-danger">
+                                    <span class="far fa-trash-alt" style="color: rgba(255, 255, 255, 0.938);"></span>
+                                    Borrar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
