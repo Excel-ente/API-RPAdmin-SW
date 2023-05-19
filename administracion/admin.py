@@ -81,9 +81,9 @@ class adminRobots(ImportExportModelAdmin):
     ]
     list_display=('NOMBRE','ACTIVO','PRODUCCION','USUARIO','GERENCIA','PROVEEDOR',)
     ordering=('NOMBRE',)
-    search_fields= ('NOMBRE',)
+    search_fields= ('NOMBRE','NOMBRE','USUARIO','GERENCIA','PROVEEDOR',)
     list_per_page = 50
-    list_filter=(ActivoFilter,'NOMBRE','USUARIO','GERENCIA','PROVEEDOR',)
+    list_filter=(ActivoFilter)
     list_display_links=('NOMBRE',)
     exclude =('COMENTARIOS','ULTIMA_ACTUALIZACION','EJECUCIONES','ERRORES','FATAL','APLICACIONES_USADAS','REPROCESAR',)
 
