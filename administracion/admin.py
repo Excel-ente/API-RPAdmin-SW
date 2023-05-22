@@ -114,6 +114,8 @@ class adminRobots(ImportExportModelAdmin):
 @admin.register(Usuario)
 class adminRobots(ImportExportModelAdmin):
     list_display=('NOMBRE_APELLIDO','GERENCIA','MAIL','TELEFONO','COMENTARIOS',)
+    list_filter=('NOMBRE_APELLIDO','GERENCIA',)
+
 
 @admin.register(Proveedor)
 class adminRobots(ImportExportModelAdmin):
