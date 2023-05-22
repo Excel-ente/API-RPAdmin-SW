@@ -133,6 +133,8 @@ STATIC_ROOT=os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 100000  # O cualquier número mayor al límite actual
+
 
 JAZZMIN_UI_TWEAKS = {
     "navbar_small_text": False,
